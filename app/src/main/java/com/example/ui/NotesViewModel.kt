@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.data.AppDatabase
 import com.example.data.NoteEntity
 import com.example.data.NoteRepository
+import com.example.util.QuickCaptureAnalyzer
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -70,6 +71,31 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
                 timestamp = System.currentTimeMillis()
             )
             repository.saveNote(note)
+        }
+    }
+
+    /**
+     * Used by the home-screen quick-capture box. [title] is exactly what the
+     * user typed (never overwritten) — if left blank, falls back to the first
+     * line of the content only for storage, not shown back in the UI. Link and
+     * category are still auto-detected from the content. Pass back [existingId]
+     * (from a previous call) while the same draft is still being edited so it
+     * keeps updating one note instead of creating duplicates.
+     */
+    fun quickCapture(existingId: String?, title: String, content: String, onSaved: (String) -> Unit) {
+        if (title.isBlank() && content.isBlank()) return
+        viewModelScope.launch {
+            val linkUrl = QuickCaptureAnalyzer.extractLink(content)
+            val note = NoteEntity(
+                id = existingId ?: java.util.UUID.randomUUID().toString(),
+                title = title.ifBlank { QuickCaptureAnalyzer.deriveTitle(content, linkUrl) },
+                content = content,
+                linkUrl = linkUrl,
+                category = QuickCaptureAnalyzer.detectCategory(content),
+                timestamp = System.currentTimeMillis()
+            )
+            repository.saveNote(note)
+            onSaved(note.id)
         }
     }
 

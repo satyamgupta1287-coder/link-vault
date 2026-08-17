@@ -15,4 +15,6 @@
 .cxx
 local.properties
 .env
-debug.keystore
+# NOTE: debug.keystore is intentionally NOT ignored — it must stay committed
+# so every CI build signs with the SAME fingerprint. Regenerating it breaks
+# Google/Phone Sign-In because Firebase/Google Cloud only trust one SHA-1.
