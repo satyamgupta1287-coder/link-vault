@@ -19,17 +19,23 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    # NAYA BADLAAV: Yahan version 8.7 se badal kar 9.3.1 kar diya gaya hai
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v3
       with:
         gradle-version: '9.3.1'
 
-    - name: Generate Debug Keystore
+    - name: Ensure stable debug keystore
       run: |
-        keytool -genkey -v -keystore debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "C=US, O=Android, CN=Android Debug"
+        if [ ! -f debug.keystore ]; then
+          echo "debug.keystore not found in repo, generating one (commit this file so future builds reuse the SAME signature!)"
+          keytool -genkey -v -keystore debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "C=US, O=Android, CN=Android Debug"
+        else
+          echo "Using debug.keystore committed in repo — signing fingerprint stays consistent."
+        fi
 
     - name: Build Debug APK
+      env:
+        WEB_CLIENT_ID: ${{ secrets.WEB_CLIENT_ID }}
       run: gradle assembleDebug
 
     - name: Upload APK
