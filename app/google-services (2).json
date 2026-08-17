@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "40549704440",
+    "project_id": "link-vault-734e4",
+    "storage_bucket": "link-vault-734e4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:40549704440:android:538ca01ebfcc59ef7e910d",
+        "android_client_info": {
+          "package_name": "com.aistudio.linkvault.kvntpq"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "40549704440-j7em4lifiu5d6b0lgbqetp23oie1pvm8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aistudio.linkvault.kvntpq",
+            "certificate_hash": "d82b4b8b29fc24c73a16ab8ce1faa1c9718064f5"
+          }
+        },
+        {
+          "client_id": "40549704440-kc7g3c7mib020phqtusnjrfcb3laolji.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aistudio.linkvault.kvntpq",
+            "certificate_hash": "7d6de33325225d9a285d6d5a1e8a7f067dbd0ae0"
+          }
+        },
+        {
+          "client_id": "40549704440-pue6kkr4fufvr95pu9ma4dpbvap4a7j8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQwQ3Fe3sD7u6wE215U3ztvOG48O7Viao"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "40549704440-pue6kkr4fufvr95pu9ma4dpbvap4a7j8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
