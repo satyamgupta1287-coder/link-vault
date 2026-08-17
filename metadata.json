@@ -1,0 +1,7 @@
+{
+  "name": "LinkVault Notes",
+  "description": "Advanced notes and link vault with instant retrieval, categorization, and secure Firebase cloud backup to prevent data loss.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
